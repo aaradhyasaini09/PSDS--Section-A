@@ -1,86 +1,96 @@
-# Node
+#stack using linked list
 class Node:
     def __init__(self, data):
         self.data = data
         self.next = None
 
+class Stack:
+    def __init__(self):
+        self.top = None
 
-# ================= STACK =================
+    def push(self, data):
+        new_node = Node(data)
+        new_node.next = self.top
+        self.top = new_node
+        print(data, "pushed")
 
-top = None
+    def pop(self):
+        if self.top is None:
+            print("Stack is empty")
+        else:
+            print( "popped :" ,self.top.data)
+            self.top = self.top.next
 
-# PUSH
-def push(data):
-    global top
+    def display(self):
+        temp = self.top
+        while temp:
+            print(temp.data, end=" ")
+            temp = temp.next
+        print()
 
-    new_node = Node(data)
-    new_node.next = top
-    top = new_node
+s = Stack()
 
-    print("Pushed:", data)
+s.push(10)
+s.push(20)
+s.push(30)
 
+print("Stack:")
+s.display()
 
-# POP
-def pop():
-    global top
+s.pop()
 
-    if top is None:
-        print("Stack is empty")
-    else:
-        print("Popped:", top.data)
-        top = top.next
+print("After pop:")
+s.display
 
+#queue using linked list
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
 
-print("STACK")
+class Queue:
+    def __init__(self):
+        self.front = None
+        self.rear = None
 
-push(10)
-push(20)
-push(30)
+    def enqueue(self, data):
+        new_node = Node(data)
 
-pop()
-pop()
+        if self.rear is None:
+            self.front = self.rear = new_node
+        else:
+            self.rear.next = new_node
+            self.rear = new_node
 
+        print(data, "enqueued")
 
-# ================= QUEUE =================
+    def dequeue(self):
+        if self.front is None:
+            print("Queue is empty")
+        else:
+            print(self.front.data, "dequeued")
+            self.front = self.front.next
 
-front = None
-rear = None
+            if self.front is None:
+                self.rear = None
 
-# ENQUEUE
-def enqueue(data):
-    global front, rear
+    def display(self):
+        temp = self.front
+        while temp:
+            print(temp.data, end=" ")
+            temp = temp.next
+        print()
 
-    new_node = Node(data)
+q = Queue()
 
-    if front is None:
-        front = rear = new_node
-    else:
-        rear.next = new_node
-        rear = new_node
+q.enqueue(10)
+q.enqueue(20)
+q.enqueue(30)
 
-    print("Enqueued:", data)
+print("Queue:")
+q.display()
 
+q.dequeue()
 
-# DEQUEUE
-def dequeue():
-    global front, rear
-
-    if front is None:
-        print("Queue is empty")
-    else:
-        print("Dequeued:", front.data)
-        front = front.next
-
-        if front is None:
-            rear = None
-
-
-print("\nQUEUE")
-
-enqueue(10)
-enqueue(20)
-enqueue(30)
-
-dequeue()
-dequeue()
-
+print("After dequeue:")
+q.display()
